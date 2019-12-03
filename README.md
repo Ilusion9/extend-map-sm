@@ -7,7 +7,6 @@ https://forums.alliedmods.net/showthread.php?t=320078
 # Commands
 ```
 sm_ve
-sm_extend
 ```
 
 # ConVars
