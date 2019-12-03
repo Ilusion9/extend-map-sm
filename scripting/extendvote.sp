@@ -1,8 +1,7 @@
-#pragma semicolon 1
-#pragma newdecls required
-
 #include <sourcemod>
 #include <sdktools>
+
+#pragma newdecls required
 
 public Plugin myinfo =
 {
@@ -29,10 +28,10 @@ public void OnPluginStart()
 	LoadTranslations("common.phrases");
 	LoadTranslations("extendvote.phrases");
 
-	g_Cvar_ExtendTime = CreateConVar("sm_cmd_extend_time", "10", "With how many minutes can be extended the current map?", FCVAR_NONE, true, 1.0);
-	g_Cvar_MaxExtends = CreateConVar("sm_cmd_extend_limit", "1", "How many times players can extend the current map? (0 - ignore)", FCVAR_NONE, true, 0.0);
+	g_Cvar_ExtendTime = CreateConVar("sm_cmd_extend_time", "10", "The current map will be extended with this much time.", FCVAR_NONE, true, 1.0);
+	g_Cvar_MaxExtends = CreateConVar("sm_cmd_extend_limit", "1", "If set, how many times players can extend the current map?", FCVAR_NONE, true, 0.0);
 	g_Cvar_ExtendDelay = CreateConVar("sm_cmd_extend_delay", "10", "After how many minutes players can request to extend the map again?", FCVAR_NONE, true, 0.0);
-	g_Cvar_ExtendCurrentRound = CreateConVar("sm_cmd_extend_current_round", "0", "Extend the current round as well? (for deathmatch servers)", FCVAR_NONE, true, 0.0, true, 1.0);
+	g_Cvar_ExtendCurrentRound = CreateConVar("sm_cmd_extend_current_round", "0", "Extend the current round as well? (for deathmatch servers where timelimit = roundtime)", FCVAR_NONE, true, 0.0, true, 1.0);
 
 	RegConsoleCmd("sm_ve", Command_ExtendMapTime);
 }
