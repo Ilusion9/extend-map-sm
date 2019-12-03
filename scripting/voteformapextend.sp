@@ -5,44 +5,42 @@
 
 public Plugin myinfo =
 {
-	name = "Vote Extend Map",
+	name = "Vote For Map Extend",
 	author = "Ilusion9",
-	description = "A vote command where players can request to extend the current map time.",
+	description = "A vote command where players can request to extend the current map",
 	version = "1.0",
 	url = "https://github.com/Ilusion9/"
 };
-
-#define VOTE_YES	"###yes###"
-#define VOTE_NO 	"###no###"
 
 ConVar g_Cvar_ExtendTime;
 ConVar g_Cvar_MaxExtends;
 ConVar g_Cvar_ExtendDelay;
 ConVar g_Cvar_ExtendCurrentRound;
 
-int g_ExtendedTimes;
+int g_Extends;
 float g_VoteTime;
 
 public void OnPluginStart()
 {
 	LoadTranslations("common.phrases");
-	LoadTranslations("extendmapvote.phrases");
+	LoadTranslations("voteformapextend.phrases");
 
 	g_Cvar_ExtendTime = CreateConVar("sm_cmd_extend_time", "10", "The current map will be extended with this much time.", FCVAR_NONE, true, 1.0);
-	g_Cvar_MaxExtends = CreateConVar("sm_cmd_extend_limit", "1", "If set, how many times players can extend the current map?", FCVAR_NONE, true, 0.0);
+	g_Cvar_MaxExtends = CreateConVar("sm_cmd_extend_limit", "1", "If set, how many times can be extended the current map?", FCVAR_NONE, true, 0.0);
 	g_Cvar_ExtendDelay = CreateConVar("sm_cmd_extend_delay", "10", "After how many minutes players can request to extend the map again?", FCVAR_NONE, true, 0.0);
 	g_Cvar_ExtendCurrentRound = CreateConVar("sm_cmd_extend_current_round", "0", "Extend the current round as well? (for deathmatch servers where timelimit = roundtime)", FCVAR_NONE, true, 0.0, true, 1.0);
 
-	RegConsoleCmd("sm_ve", Command_ExtendMapTime);
+	AutoExecConfig(true, "voteformapextend");
+	RegConsoleCmd("sm_ve", Command_VoteExtend);
 }
 
 public void OnMapStart()
 {
-	g_ExtendedTimes = 0;
+	g_Extends = 0;
 	g_VoteTime = 0.0;
 }
 
-public Action Command_ExtendMapTime(int client, int args)
+public Action Command_VoteExtend(int client, int args)
 {
 	if (IsVoteInProgress())
 	{
@@ -50,7 +48,7 @@ public Action Command_ExtendMapTime(int client, int args)
 		return Plugin_Handled;
 	}
 	
-	if (g_ExtendedTimes >= g_Cvar_MaxExtends.IntValue)
+	if (g_Extends >= g_Cvar_MaxExtends.IntValue)
 	{
 		ReplyToCommand(client, "[SM] %t", "Extend Vote Limit");
 		return Plugin_Handled;
@@ -71,8 +69,8 @@ public Action Command_ExtendMapTime(int client, int args)
 	menu.VoteResultCallback = VoteResultCallback_ExtendMapTime;
 	
 	menu.SetTitle("Extend Vote Question");
-	menu.AddItem(VOTE_YES, "Yes");
-	menu.AddItem(VOTE_NO, "No");
+	menu.AddItem("", "Yes");
+	menu.AddItem("", "No");
 	
 	menu.ExitButton = false;
 	menu.DisplayVoteToAll(15);
@@ -123,7 +121,7 @@ public void VoteResultCallback_ExtendMapTime(Menu menu, int num_votes, int num_c
 	
 	if (StrEqual(item, VOTE_YES, false))
 	{
-		g_ExtendedTimes++;
+		g_Extends++;
 		ExtendMapTimeLimit(g_Cvar_ExtendTime.IntValue * 60);
 		
 		if (g_Cvar_ExtendCurrentRound.BoolValue)
