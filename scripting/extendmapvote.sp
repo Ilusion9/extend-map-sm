@@ -5,15 +5,15 @@
 
 public Plugin myinfo =
 {
-	name = "Extend Vote",
+	name = "Vote Extend Map",
 	author = "Ilusion9",
-	description = "Players can request to extend the current map time",
+	description = "A vote command where players can request to extend the current map time.",
 	version = "1.0",
 	url = "https://github.com/Ilusion9/"
 };
 
-#define VOTE_NO		"###no###"
 #define VOTE_YES	"###yes###"
+#define VOTE_NO 	"###no###"
 
 ConVar g_Cvar_ExtendTime;
 ConVar g_Cvar_MaxExtends;
@@ -26,7 +26,7 @@ float g_VoteTime;
 public void OnPluginStart()
 {
 	LoadTranslations("common.phrases");
-	LoadTranslations("extendvote.phrases");
+	LoadTranslations("extendmapvote.phrases");
 
 	g_Cvar_ExtendTime = CreateConVar("sm_cmd_extend_time", "10", "The current map will be extended with this much time.", FCVAR_NONE, true, 1.0);
 	g_Cvar_MaxExtends = CreateConVar("sm_cmd_extend_limit", "1", "If set, how many times players can extend the current map?", FCVAR_NONE, true, 0.0);
