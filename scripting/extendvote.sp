@@ -35,7 +35,6 @@ public void OnPluginStart()
 	g_Cvar_ExtendCurrentRound = CreateConVar("sm_cmd_extend_current_round", "0", "Extend the current round as well? (for deathmatch servers)", FCVAR_NONE, true, 0.0, true, 1.0);
 
 	RegConsoleCmd("sm_ve", Command_ExtendMapTime);
-	RegConsoleCmd("sm_extend", Command_ExtendMapTime);
 }
 
 public void OnMapStart()
