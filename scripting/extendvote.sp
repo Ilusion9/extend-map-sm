@@ -12,7 +12,7 @@ public Plugin myinfo =
 	url = "https://github.com/Ilusion9/"
 };
 
-#define VOTE_NO	"###no###"
+#define VOTE_NO		"###no###"
 #define VOTE_YES	"###yes###"
 
 ConVar g_Cvar_ExtendTime;
