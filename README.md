@@ -3,6 +3,12 @@ Players can request to extend the current map time.
 
 # Alliedmods
 
+# Commands
+```
+sm_ve
+sm_extend
+```
+
 # ConVars
 ```
 sm_cmd_extend_time 10 // With how many minutes can be extended the current map?
