@@ -2,6 +2,7 @@
 Players can request to extend the current map time.
 
 # Alliedmods
+https://forums.alliedmods.net/showthread.php?t=320078
 
 # Commands
 ```
