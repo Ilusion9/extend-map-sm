@@ -113,20 +113,20 @@ public int MenuHandler_ExtendMapTime(Menu menu, MenuAction action, int param1, i
 
 public void VoteResultCallback_ExtendMapTime(Menu menu, int num_votes, int num_clients, const int[][] client_info, int num_items, const int[][] item_info)
 {
-	char item[65];
-	menu.GetItem(item_info[0][VOTEINFO_ITEM_INDEX], item, sizeof(item));
+	char display[64];
+	menu.GetItem(item_info[0][VOTEINFO_ITEM_INDEX], "", 0, _, display, sizeof(display));
 	
 	g_VoteTime = GetGameTime();
 	int percent = RoundToFloor(float(item_info[0][VOTEINFO_ITEM_VOTES]) / float(num_votes) * 100);
 	
-	if (StrEqual(item, VOTE_YES, false))
+	if (StrEqual(display, "Yes", true))
 	{
 		g_Extends++;
 		ExtendMapTimeLimit(g_Cvar_ExtendTime.IntValue * 60);
 		
 		if (g_Cvar_ExtendCurrentRound.BoolValue)
 		{
-			GameRules_SetProp("m_iRoundTime", GameRules_GetProp("m_iRoundTime", 4, 0) + g_Cvar_ExtendTime.IntValue * 60, 4, 0, true); 
+			ExtendRoundTime(g_Cvar_ExtendTime.IntValue * 60);
 		}
 		
 		PrintToChatAll("[SM] %t", "Extend Vote Successful", percent, num_votes);
@@ -135,4 +135,14 @@ public void VoteResultCallback_ExtendMapTime(Menu menu, int num_votes, int num_c
 	{
 		PrintToChatAll("[SM] %t", "Extend Vote Failed", percent, num_votes);
 	}
+}
+
+int GetRoundTime()
+{
+	return GameRules_GetProp("m_iRoundTime", 4, 0);
+}
+
+void ExtendRoundTime(int seconds)
+{
+	GameRules_SetProp("m_iRoundTime", GetRoundTime() + seconds, 4, 0, true); 
 }
