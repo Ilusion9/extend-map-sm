@@ -1,31 +1,25 @@
 "Phrases"
 {
-	"Extend Vote Question"
-	{
-		"#format"		"{1:d}"
-		"en"			"Extend the current map by {1} minutes?"
-	}
-
-	"Extend Vote Limit"
+	"VE Extends Limit"
 	{
 		"en"			"The current map cannot be extended again."
 	}
 	
-	"Extend Vote Delay"
+	"VE Already Voted"
+	{
+ 		"#format"		"{1:d},{2:d}"
+	 	"en"			"You have already voted to extend the current map. ({1} votes, {2} required)"
+	}
+	
+	"VE Requested"
+	{
+		"#format"		"{1:s},{2:d},{3:d}"
+		"en"			"{1} wants to extend the current map. ({2} votes, {3} required)"
+	}
+	
+	"VE Map Extended"
 	{
 		"#format"		"{1:d}"
-		"en"			"You can request to extend the current map after {1} minutes."
-	}
-	
-	"Extend Vote Successful"
-	{
-		"#format"		"{1:d},{2:d}"
-		"en"			"The current map has been extended. (Received {1}%% of {2} votes)"
-	}
-	
-	"Extend Vote Failed"
-	{
-		"#format"		"{1:d},{2:d}"
-		"en"			"Vote failed. The current map will not be extended. (Received {1}%% of {2} votes)"
+		"en"			"The current map has been extended by {1} minutes."
 	}
 }
