@@ -6,7 +6,7 @@ https://forums.alliedmods.net/showthread.php?t=320078
 
 # Commands
 ```
-sm_ve - start the vote
+sm_ve
 ```
 
 # ConVars
