@@ -5,9 +5,9 @@
 
 public Plugin myinfo =
 {
-	name = "Extend Current Map",
+	name = "Extend Map Command",
 	author = "Ilusion9",
-	description = "A vote command where players can request to extend the current map",
+	description = "A command where players can request to extend the current map",
 	version = "1.0",
 	url = "https://github.com/Ilusion9/"
 };
