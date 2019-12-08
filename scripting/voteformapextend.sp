@@ -33,6 +33,7 @@ public void OnPluginStart()
 
 	AutoExecConfig(true, "voteformapextend");
 	RegConsoleCmd("sm_ve", Command_VoteExtend);
+	RegConsoleCmd("sm_extend", Command_VoteExtend);
 }
 
 public void OnMapStart()
