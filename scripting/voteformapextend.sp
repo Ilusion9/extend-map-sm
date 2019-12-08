@@ -5,7 +5,7 @@
 
 public Plugin myinfo =
 {
-	name = "Vote For Map Extend",
+	name = "Extend Current Map",
 	author = "Ilusion9",
 	description = "A vote command where players can request to extend the current map",
 	version = "1.0",
@@ -32,7 +32,6 @@ public void OnPluginStart()
 	g_Cvar_ExtendCurrentRound = CreateConVar("sm_ve_current_round", "0", "Extend the current round as well? (for deathmatch servers where timelimit = roundtime)", FCVAR_NONE, true, 0.0, true, 1.0);
 
 	AutoExecConfig(true, "voteformapextend");
-	RegConsoleCmd("sm_ve", Command_VoteExtend);
 	RegConsoleCmd("sm_extend", Command_VoteExtend);
 }
 
@@ -61,19 +60,41 @@ public void OnClientDisconnect(int client)
 	}
 }
 
+public void OnClientSayCommand_Post(int client, const char[] command, const char[] sArgs)
+{
+	if (StrEqual(sArgs, "extend", false))
+	{
+		ReplySource oldSource = SetCmdReplySource(SM_REPLY_TO_CHAT);
+		AttemptVoteExtend(client);
+		SetCmdReplySource(oldSource);
+	}
+}
+
 public Action Command_VoteExtend(int client, int args)
 {
+	AttemptVoteExtend(client);
+	return Plugin_Handled;
+}
+
+void AttemptVoteExtend(int client)
+{
+	if (!client)
+	{
+		ReplyToCommand(client, "[SM] %t", "Command is in-game only");
+		return;
+	}
+	
 	if (g_Extends >= g_Cvar_MaxExtends.IntValue)
 	{
 		ReplyToCommand(client, "[SM] %t", "VE Extends Limit");
-		return Plugin_Handled;
+		return;
 	}
 	
 	int requiredVotes = RoundToCeil(GetRealClientCount() * g_Cvar_VotesRequired.FloatValue);
 	if (g_HasVoted[client])
 	{
 		ReplyToCommand(client, "[SM] %t", "VE Already Voted", g_Votes, requiredVotes);
-		return Plugin_Handled;
+		return;
 	}
 	
 	g_Votes++;
@@ -87,15 +108,13 @@ public Action Command_VoteExtend(int client, int args)
 	{
 		ExtendCurrentMap();
 	}
-	
-	return Plugin_Handled;
 }
 
 void ExtendCurrentMap()
 {
 	PrintToChatAll("[SM] %t", "VE Map Extended", g_Cvar_ExtendTime.IntValue);
-	ExtendMapTimeLimit(g_Cvar_ExtendTime.IntValue * 60);
 	
+	ExtendMapTimeLimit(g_Cvar_ExtendTime.IntValue * 60);
 	if (g_Cvar_ExtendCurrentRound.BoolValue)
 	{
 		ExtendRoundTime(g_Cvar_ExtendTime.IntValue * 60);
