@@ -26,7 +26,7 @@ public void OnPluginStart()
 	LoadTranslations("common.phrases");
 	LoadTranslations("voteformapextend.phrases");
 
-	g_Cvar_ExtendTime = CreateConVar("sm_extendmap_time", "10", "The current map will be extended with this much time.", FCVAR_NONE, true, 1.0);
+	g_Cvar_ExtendTime = CreateConVar("sm_extendmap_extendtime", "10", "The current map will be extended with this much time.", FCVAR_NONE, true, 1.0);
 	g_Cvar_MaxExtends = CreateConVar("sm_extendmap_maxextends", "1", "If set, how many times can be extended the current map?", FCVAR_NONE, true, 0.0);
 	g_Cvar_VotesRequired = CreateConVar("sm_extendmap_percentage", "0.60", "Percentage of players required to extend the current map (def 60%)", 0, true, 0.05, true, 1.0);
 	g_Cvar_ExtendCurrentRound = CreateConVar("sm_extendmap_extendcurrentround", "0", "Extend the current round as well? (for deathmatch servers where timelimit = roundtime)", FCVAR_NONE, true, 0.0, true, 1.0);
