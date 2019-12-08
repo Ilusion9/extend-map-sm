@@ -8,13 +8,13 @@ public Plugin myinfo =
 	name = "Extend Map Command",
 	author = "Ilusion9",
 	description = "A command where players can request to extend the current map",
-	version = "1.0",
+	version = "1.1",
 	url = "https://github.com/Ilusion9/"
 };
 
 ConVar g_Cvar_ExtendTime;
 ConVar g_Cvar_MaxExtends;
-ConVar g_Cvar_VotesRequired;
+ConVar g_Cvar_PercentageRequired;
 ConVar g_Cvar_ExtendCurrentRound;
 
 int g_Votes;
@@ -28,7 +28,7 @@ public void OnPluginStart()
 
 	g_Cvar_ExtendTime = CreateConVar("sm_extendmap_extendtime", "10", "The current map will be extended with this much time.", FCVAR_NONE, true, 1.0);
 	g_Cvar_MaxExtends = CreateConVar("sm_extendmap_maxextends", "1", "If set, how many times can be extended the current map?", FCVAR_NONE, true, 0.0);
-	g_Cvar_VotesRequired = CreateConVar("sm_extendmap_percentage", "0.60", "Percentage of players required to extend the current map (def 60%)", 0, true, 0.05, true, 1.0);
+	g_Cvar_PercentageRequired = CreateConVar("sm_extendmap_percentagereq", "0.60", "Percentage of players required to extend the current map (def 60%)", 0, true, 0.05, true, 1.0);
 	g_Cvar_ExtendCurrentRound = CreateConVar("sm_extendmap_extendcurrentround", "0", "Extend the current round as well? (for deathmatch servers where timelimit = roundtime)", FCVAR_NONE, true, 0.0, true, 1.0);
 
 	AutoExecConfig(true, "voteformapextend");
@@ -53,7 +53,7 @@ public void OnClientDisconnect(int client)
 		g_Votes--;
 	}
 	
-	int requiredVotes = RoundToCeil(GetRealClientCount(client) * g_Cvar_VotesRequired.FloatValue);
+	int requiredVotes = RoundToCeil(GetRealClientCount(client) * g_Cvar_PercentageRequired.FloatValue);
 	if (g_Votes >= requiredVotes)
 	{
 		ExtendCurrentMap();
@@ -90,7 +90,7 @@ void AttemptVoteExtend(int client)
 		return;
 	}
 	
-	int requiredVotes = RoundToCeil(GetRealClientCount() * g_Cvar_VotesRequired.FloatValue);
+	int requiredVotes = RoundToCeil(GetRealClientCount() * g_Cvar_PercentageRequired.FloatValue);
 	if (g_HasVoted[client])
 	{
 		ReplyToCommand(client, "[SM] %t", "Already Voted for Extend", g_Votes, requiredVotes);
