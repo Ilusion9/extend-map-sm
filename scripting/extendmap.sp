@@ -24,14 +24,14 @@ bool g_HasVoted[MAXPLAYERS + 1];
 public void OnPluginStart()
 {
 	LoadTranslations("common.phrases");
-	LoadTranslations("extendmap.phrases");
+	LoadTranslations("voteformapextend.phrases");
 
-	g_Cvar_ExtendTime = CreateConVar("sm_map_extend_time", "10", "The current map will be extended with this much time.", FCVAR_NONE, true, 1.0);
-	g_Cvar_MaxExtends = CreateConVar("sm_map_max_extends", "1", "If set, how many times can be extended the current map?", FCVAR_NONE, true, 0.0);
-	g_Cvar_VotesRequired = CreateConVar("sm_map_extend_required", "0.60", "Percentage of players required to extend the current map (def 60%)", 0, true, 0.05, true, 1.0);
-	g_Cvar_ExtendCurrentRound = CreateConVar("sm_map_extend_current_round", "0", "Extend the current round as well? (for deathmatch servers where timelimit = roundtime)", FCVAR_NONE, true, 0.0, true, 1.0);
+	g_Cvar_ExtendTime = CreateConVar("sm_extendmap_time", "10", "The current map will be extended with this much time.", FCVAR_NONE, true, 1.0);
+	g_Cvar_MaxExtends = CreateConVar("sm_extendmap_maxextends", "1", "If set, how many times can be extended the current map?", FCVAR_NONE, true, 0.0);
+	g_Cvar_VotesRequired = CreateConVar("sm_extendmap_percentage", "0.60", "Percentage of players required to extend the current map (def 60%)", 0, true, 0.05, true, 1.0);
+	g_Cvar_ExtendCurrentRound = CreateConVar("sm_extendmap_extendcurrentround", "0", "Extend the current round as well? (for deathmatch servers where timelimit = roundtime)", FCVAR_NONE, true, 0.0, true, 1.0);
 
-	AutoExecConfig(true, "extendmap");
+	AutoExecConfig(true, "voteformapextend");
 	RegConsoleCmd("sm_extend", Command_VoteExtend);
 }
 
