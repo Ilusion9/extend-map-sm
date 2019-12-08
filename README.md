@@ -12,8 +12,8 @@ extend (chat)
 
 # ConVars
 ```
-sm_map_extend_time 10 // The current map will be extended with this much time.
-sm_map_max_extends 1 // If set, how many times players can extend the current map?
-sm_map_extend_required 0.60 // Percentage of players required to extend the current map (def 60%)
-sm_map_extend_current_round 0 // Extend the current round as well? (for deathmatch servers where timelimit = roundtime)
+sm_extend_time 10 // The current map will be extended with this much time.
+sm_max_extends 1 // If set, how many times players can extend the current map?
+sm_extend_required 0.60 // Percentage of players required to extend the current map (def 60%)
+sm_extend_current_round 0 // Extend the current round as well? (for deathmatch servers where timelimit = roundtime)
 ```
