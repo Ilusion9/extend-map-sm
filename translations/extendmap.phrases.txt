@@ -1,5 +1,10 @@
 "Phrases"
 {
+	"Min Players To Extend"
+	{
+		"en"			"The minimal number of players required has not been met."
+	}
+
 	"Max Extends Reached"
 	{
 		"en"			"The current map cannot be extended again."
