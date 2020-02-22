@@ -1,5 +1,5 @@
 # Description
-A command where players can request to extend the current map time.
+A command where players can request to extend the current map time. Tested only in CS:GO. Might work on another games.
 
 # Alliedmods
 https://forums.alliedmods.net/showthread.php?t=320078
