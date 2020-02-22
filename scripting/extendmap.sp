@@ -1,6 +1,6 @@
 #include <sourcemod>
 #include <sdktools>
-
+#include <colorlib_sample>
 #pragma newdecls required
 
 public Plugin myinfo =
@@ -24,11 +24,10 @@ bool g_HasVoted[MAXPLAYERS + 1];
 
 public void OnPluginStart()
 {
-	LoadTranslations("common.phrases");
 	LoadTranslations("extendmap.phrases");
 
 	g_Cvar_ExtendTime = CreateConVar("sm_extendmap_extendtime", "10", "The current map will be extended with this much time.", FCVAR_NONE, true, 1.0);
-	g_Cvar_MinPlayers = CreateConVar("sm_extendmap_minplayers", "1", "NNumber of players required before the extend command will be enabled.", FCVAR_NONE, true, 1.0);
+	g_Cvar_MinPlayers = CreateConVar("sm_extendmap_minplayers", "1", "Number of players required before the extend command will be enabled.", FCVAR_NONE, true, 1.0);
 	g_Cvar_MaxExtends = CreateConVar("sm_extendmap_maxextends", "1", "If set, how many times can be extended the current map?", FCVAR_NONE, true, 0.0);
 	g_Cvar_PercentageRequired = CreateConVar("sm_extendmap_percentagereq", "0.60", "Percentage of players required to extend the current map (def 60%)", 0, true, 0.05, true, 1.0);
 	g_Cvar_ExtendCurrentRound = CreateConVar("sm_extendmap_extendcurrentround", "0", "Extend the current round as well? (for deathmatch servers where timelimit = roundtime)", FCVAR_NONE, true, 0.0, true, 1.0);
@@ -86,27 +85,26 @@ void AttemptVoteExtend(int client)
 {
 	if (!client)
 	{
-		ReplyToCommand(client, "[SM] %t", "Command is in-game only");
 		return;
 	}
 	
 	int players = GetRealClientCount();
 	if (players < g_Cvar_MinPlayers.IntValue)
 	{
-		ReplyToCommand(client, "[SM] %t", "Min Players To Extend");
-		return;			
+		CReplyToCommand(client, "\x04[Extend]\x01 %t", "Min Players To Extend");
+		return;
 	}
 	
 	if (g_Extends >= g_Cvar_MaxExtends.IntValue)
 	{
-		ReplyToCommand(client, "[SM] %t", "Max Extends Reached");
+		CReplyToCommand(client, "\x04[Extend]\x01 %t", "Max Extends Reached");
 		return;
 	}
 	
 	int requiredVotes = RoundToCeil(players * g_Cvar_PercentageRequired.FloatValue);
 	if (g_HasVoted[client])
 	{
-		ReplyToCommand(client, "[SM] %t", "Already Voted for Extend", g_Votes, requiredVotes);
+		CReplyToCommand(client, "\x04[Extend]\x01 %t", "Already Voted for Extend", g_Votes, requiredVotes);
 		return;
 	}
 	
@@ -115,7 +113,7 @@ void AttemptVoteExtend(int client)
 	
 	char name[MAX_NAME_LENGTH];
 	GetClientName(client, name, sizeof(name));
-	PrintToChatAll("[SM] %t", "Vote for Extend Accepted", name, g_Votes, requiredVotes);
+	CPrintToChatAll("\x04[Extend]\x01 %t", "Vote for Extend Accepted", name, g_Votes, requiredVotes);
 	
 	if (g_Votes >= requiredVotes)
 	{
@@ -125,7 +123,7 @@ void AttemptVoteExtend(int client)
 
 void ExtendCurrentMap()
 {
-	PrintToChatAll("[SM] %t", "Current Map Extended", g_Cvar_ExtendTime.IntValue);
+	CPrintToChatAll("\x04[Extend]\x01 %t", "Current Map Extended", g_Cvar_ExtendTime.IntValue);
 	
 	ExtendMapTimeLimit(g_Cvar_ExtendTime.IntValue * 60);
 	if (g_Cvar_ExtendCurrentRound.BoolValue)
