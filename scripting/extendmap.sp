@@ -91,20 +91,20 @@ void AttemptVoteExtend(int client)
 	int players = GetRealClientCount();
 	if (players < g_Cvar_MinPlayers.IntValue)
 	{
-		CReplyToCommand(client, "\x04[Extend]\x01 %t", "Min Players To Extend");
+		CReplyToCommand(client, "%t", "Min Players To Extend");
 		return;
 	}
 	
 	if (g_Extends >= g_Cvar_MaxExtends.IntValue)
 	{
-		CReplyToCommand(client, "\x04[Extend]\x01 %t", "Max Extends Reached");
+		CReplyToCommand(client, "%t", "Max Extends Reached");
 		return;
 	}
 	
 	int requiredVotes = RoundToCeil(players * g_Cvar_PercentageRequired.FloatValue);
 	if (g_HasVoted[client])
 	{
-		CReplyToCommand(client, "\x04[Extend]\x01 %t", "Already Voted for Extend", g_Votes, requiredVotes);
+		CReplyToCommand(client, "%t", "Already Voted for Extend", g_Votes, requiredVotes);
 		return;
 	}
 	
@@ -113,7 +113,7 @@ void AttemptVoteExtend(int client)
 	
 	char name[MAX_NAME_LENGTH];
 	GetClientName(client, name, sizeof(name));
-	CPrintToChatAll("\x04[Extend]\x01 %t", "Vote for Extend Accepted", name, g_Votes, requiredVotes);
+	CPrintToChatAll("%t", "Vote for Extend Accepted", name, g_Votes, requiredVotes);
 	
 	if (g_Votes >= requiredVotes)
 	{
@@ -123,7 +123,7 @@ void AttemptVoteExtend(int client)
 
 void ExtendCurrentMap()
 {
-	CPrintToChatAll("\x04[Extend]\x01 %t", "Current Map Extended", g_Cvar_ExtendTime.IntValue);
+	CPrintToChatAll("%t", "Current Map Extended", g_Cvar_ExtendTime.IntValue);
 	
 	ExtendMapTimeLimit(g_Cvar_ExtendTime.IntValue * 60);
 	if (g_Cvar_ExtendCurrentRound.BoolValue)
