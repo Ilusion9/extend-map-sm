@@ -1,0 +1,36 @@
+// Available chat colors:
+// 
+// {default}, {darkred}, {purple}, {green}, {lightgreen}, 
+// {lime}, {red}, {grey}, {yellow}, {orange}, {bluegrey},
+// {blue}, {darkblue}, {grey2}, {orchid}, {lightred}
+
+"Phrases"
+{
+	"Min Players To Extend"
+	{
+		"ru"			"Минимальное количество игроков не достигнуто."
+	}
+
+	"Max Extends Reached"
+	{
+		"ru"			"Текущая карта не может быть снова продлена."
+	}
+	
+	"Already Voted for Extend"
+	{
+ 		"#format"		"{1:d},{2:d}"
+	 	"ru"			"Вы уже проголосовали за продление текущей карты. ({1} голосов, {2} требуется)"
+	}
+	
+	"Vote for Extend Accepted"
+	{
+		"#format"		"{1:s},{2:d},{3:d}"
+		"ru"			"{orange}{1}{default} хочет продлить текущую карту. ({2} голосов, {3} требуется)"
+	}
+	
+	"Current Map Extended"
+	{
+		"#format"		"{1:d}"
+		"ru"			"Текущая карта была продлена на {orange}{1}{default} минут."
+	}
+}
