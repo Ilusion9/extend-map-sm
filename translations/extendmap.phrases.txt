@@ -19,12 +19,12 @@
 	"Vote for Extend Accepted"
 	{
 		"#format"		"{1:s},{2:d},{3:d}"
-		"en"			"{orange}{1}{default} wants to extend the current map. ({2} votes, {3} required)"
+		"en"			"{$orange}{1}{default} wants to extend the current map. ({2} votes, {3} required)"
 	}
 	
 	"Current Map Extended"
 	{
 		"#format"		"{1:d}"
-		"en"			"The current map has been extended by {orange}{1}{default} minutes."
+		"en"			"The current map has been extended by {$orange}{1}{default} minutes."
 	}
 }
