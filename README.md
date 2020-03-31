@@ -1,6 +1,9 @@
 # Description
 A command where players can request to extend the current map time. Tested only in CS:GO. Might work on another games.
 
+# Dependencies
+- Sourcecolors (include file) - https://github.com/Ilusion9/sourcecolors-inc-sm
+
 # Alliedmods
 https://forums.alliedmods.net/showthread.php?t=320078
 
