@@ -1,9 +1,3 @@
-// Available chat colors:
-// 
-// {default}, {darkred}, {purple}, {green}, {lightgreen}, 
-// {lime}, {red}, {grey}, {yellow}, {orange}, {bluegrey},
-// {blue}, {darkblue}, {grey2}, {orchid}, {lightred}
-
 "Phrases"
 {
 	"Min Players To Extend"
