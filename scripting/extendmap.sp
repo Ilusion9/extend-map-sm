@@ -1,6 +1,6 @@
 #include <sourcemod>
 #include <sdktools>
-#include <colorlib_sample>
+#include <sourcecolors>
 #pragma newdecls required
 
 public Plugin myinfo =
